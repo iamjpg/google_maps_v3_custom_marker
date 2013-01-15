@@ -35,35 +35,37 @@ var setCustomPin = function() {
 	var _collection = [
 		{
 			name: "div1",
-			class_name: "custom_pin active",
+			class_name: "custom_pin",
 			label: "500k",
 			lat: 47.688729,
 			lng: -122.286721
 		},
 		{
 			name: "div2",
-			class_name: "custom_pin sold",
+			class_name: "custom_pin",
 			label: "650k",
 			lat: 47.6884438,
 			lng: -122.287455
 		},
 		{
 			name: "div3",
-			class_name: "custom_pin active",
+			status: "sold",
+			class_name: "custom_pin",
 			label: "820k",
 			lat: 47.68684970494409,
 			lng: -122.28802442550659
 		},
 		{
 			name: "div4",
-			class_name: "custom_pin active",
+			status: "open",
+			class_name: "custom_pin",
 			label: "325k",
 			lat: 47.68616356653837,
 			lng: -122.27527856826782
 		},
 		{
 			name: "div5",
-			class_name: "custom_pin active",
+			class_name: "custom_pin",
 			label: "525k",
 			lat: 47.6859035538369,
 			lng: -122.31576919555664

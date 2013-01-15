@@ -24,7 +24,7 @@ PinWithLabelCollection = (function() {
 	// Set Events method.
 	PinWithLabelCollection.prototype.setEvents = function() {
 		
-		_this = this;
+		var _this = this;
 		
 		google.maps.event.addListener(this.map, 'idle', function() {
 
@@ -81,7 +81,7 @@ PinWithLabelCollection = (function() {
 	// Print the pins
 	PinWithLabelCollection.prototype.print = function(_x, _y, _name) {
 		
-		_this = this;
+		var _this = this;
 		
 		// Loop over the array and print to the screen
 		for (i = 0; i < _this.collectionArray.length; i++) {
@@ -97,17 +97,54 @@ PinWithLabelCollection = (function() {
 			// If the div has not been added to the DOM - create!
 			if (!document.getElementById(this.collectionArray[i].name)) {
 				
-				var _class_name = "PinWithLabelCollection " + this.collectionArray[i].class_name;
-
+				var _class_name = this.collectionArray[i].class_name;
+				
+				// Create divs
 				var _div = document.createElement("div");
+				var _div_label = document.createElement("div");
+				var _div_price = document.createElement("div");
+				
+				// Container styling
 				_div.id = this.collectionArray[i].name;
-				_div.className = _class_name;
+				_div.className = "PinWithLabelCollection";
 				_div.style.position = "absolute";
 				_div.style.zIndex = "10000";
 				_div.style.left = _posLeft + "px";
 				_div.style.top = _posTop + "px";
-				_div.innerHTML = this.collectionArray[i].label;
-
+				_div.style.fontSize = "10px";
+				_div.style.textAlign = "center";
+				
+				// Label styling
+				if (_this.collectionArray[i].status && _this.collectionArray[i].status !== "active") {
+					
+					_div_label.style.padding = "2px";
+					_div_label.style.margin = "auto";
+					_div_label.style.fontSize = "9px";
+					_div_label.style.color = "#FFFFFF";
+					_div_label.style.display = "inline-block";
+					
+					if (_this.collectionArray[i].status == "open") {
+						_div_label.style.background = "#EA791C";
+					} else {
+						_div_label.style.background = "#CA0C0B";
+					}
+					
+					_div_label.innerHTML = _this.collectionArray[i].status;
+				}
+				
+				// Price styling
+				_div_price.className = _class_name;
+				_div_price.innerHTML = this.collectionArray[i].label;
+				
+				// Conditionally add label
+				if (_div_label) {
+					_div.appendChild(_div_label);
+				}
+				
+				// Add price
+				_div.appendChild(_div_price);
+				
+				// Append to the DOM
 				document.getElementById("map_div").appendChild(_div);
 			} else {
 
