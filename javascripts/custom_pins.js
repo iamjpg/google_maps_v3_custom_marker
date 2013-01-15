@@ -51,7 +51,7 @@ PinWithLabel = (function() {
 						_elements[i].style.display = 'block';
 					}
 				}
-			}, 250);
+			}, 500);
 			
 			
 		});
