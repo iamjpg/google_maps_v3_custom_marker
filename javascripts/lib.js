@@ -26,12 +26,26 @@ var initMap = function () {
 
 var setCustomPin = function() {
 	
-	var _pin = new PinWithLabel("pin1");
+	var _pin_collection = new PinWithLabelCollection("First Collection");
 	
-	_pin.setMap(_map);
-	_pin.setLat(47.688729);
-	_pin.setLng(-122.286721);
+	var _collection = [
+		{
+			name: "div1",
+			lat: 47.688729,
+			lng: -122.286721
+		},
+		{
+			name: "div2",
+			lat: 47.6884438,
+			lng: -122.287455
+		}
+	];
 	
-	console.log(_pin);
+	_pin_collection.set({
+		map: _map,
+		collection: _collection
+	});
+	
+	console.log(_pin_collection);
 	
 }

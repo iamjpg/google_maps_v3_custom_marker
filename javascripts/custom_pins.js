@@ -1,34 +1,32 @@
-var PinWithLabel;
+var PinWithLabelCollection;
 
-PinWithLabel = (function() {
+PinWithLabelCollection = (function() {
 	
-	function PinWithLabel(name) {
+	function PinWithLabelCollection(name) {
 		this.name = name;
 	}
 	
-	PinWithLabel.prototype.setLat = function(lat) {
-		this.lat = lat;
+	PinWithLabelCollection.prototype.collectionArray = [];
+	
+	PinWithLabelCollection.prototype.set = function(options) {
+		this.map = options.map;
+		this.collectionArray = options.collection;
+		
+		this.setEvents();
 	}
 	
-	PinWithLabel.prototype.setLng = function(lng) {
-		this.lng = lng;
-	}
-	
-	PinWithLabel.prototype.setMap = function(map) {
+	PinWithLabelCollection.prototype.setEvents = function() {
 		
-		var _this = this;
+		_this = this;
 		
-		this.map = map;
-		
-		google.maps.event.addListener(map, 'idle', function() {
+		google.maps.event.addListener(this.map, 'idle', function() {
 
-			_this.setProjection()
-			_this.print();
+			_this.setProjection();
 		
 		});
 		
 		// Hide on Drag
-		google.maps.event.addListener(map, 'dragstart', function() {
+		google.maps.event.addListener(this.map, 'dragstart', function() {
 			
 			if (document.getElementsByClassName("PinWithLabel")) {
 				var _elements = document.getElementsByClassName("PinWithLabel");
@@ -41,7 +39,7 @@ PinWithLabel = (function() {
 		});
 		
 		// Show again
-		google.maps.event.addListener(map, 'dragend', function() {
+		google.maps.event.addListener(this.map, 'dragend', function() {
 			
 			setTimeout(function() {
 				if (document.getElementsByClassName("PinWithLabel")) {
@@ -55,59 +53,64 @@ PinWithLabel = (function() {
 			
 			
 		});
+		
 	}
 	
-	PinWithLabel.prototype.setProjection = function() {
+	PinWithLabelCollection.prototype.setProjection = function() {
 		
 		var _this = this;
 		
-		var _projection = _this.map.getProjection();
-		var _topRight = _projection.fromLatLngToPoint(_this.map.getBounds().getNorthEast()); 
-		var _bottomLeft = _projection.fromLatLngToPoint(_this.map.getBounds().getSouthWest()); 
-		var _scale = Math.pow(2,_this.map.getZoom());
+		_this.projection = _this.map.getProjection();
+		_this.topRight = _this.projection.fromLatLngToPoint(_this.map.getBounds().getNorthEast()); 
+		_this.bottomLeft = _this.projection.fromLatLngToPoint(_this.map.getBounds().getSouthWest()); 
+		_this.scale = Math.pow(2,_this.map.getZoom());
 		
-		var _point = _projection.fromLatLngToPoint(
-			new google.maps.LatLng(_this.lat,_this.lng)
-		);
-		
-		// console.log(_point);
-	   
-		_this.posLeft = (_point.x - _bottomLeft.x) * _scale;
-		_this.posTop = (_point.y - _topRight.y) * _scale;
+		_this.print();
 		
 	}
 	
-	PinWithLabel.prototype.print = function() {
+	PinWithLabelCollection.prototype.print = function(_x, _y, _name) {
 		
 		_this = this;
 		
-		if (!document.getElementById(_this.name)) {
+		for (i = 0; i < _this.collectionArray.length; i++) {
+
+			var _point = _this.projection.fromLatLngToPoint(
+				new google.maps.LatLng(this.collectionArray[i].lat,this.collectionArray[i].lng)
+			);
 			
-			var _div = document.createElement("div");
-			_div.id = _this.name;
-			_div.className = "PinWithLabel";
-			_div.style.position = "absolute";
-			_div.style.width = "10px";
-			_div.style.height = "10px";
-			_div.style.background = "red";
-			_div.style.color = "white";
-			_div.style.zIndex = "10000";
-			_div.style.left = _this.posLeft + "px";
-			_div.style.top = _this.posTop + "px";
+			var _posLeft = (_point.x - _this.bottomLeft.x) * _this.scale;
+			var _posTop = (_point.y - _this.topRight.y) * _this.scale;
 			
-			document.body.appendChild(_div);
-		} else {
-			
-			_div = document.getElementById(_this.name);
-			
-			_div.style.left = _this.posLeft + "px";
-			_div.style.top = _this.posTop + "px";
+			if (!document.getElementById(this.collectionArray[i].name)) {
+
+				var _div = document.createElement("div");
+				_div.id = this.collectionArray[i].name;
+				_div.className = "PinWithLabel";
+				_div.style.position = "absolute";
+				_div.style.width = "10px";
+				_div.style.height = "10px";
+				_div.style.background = "red";
+				_div.style.color = "white";
+				_div.style.zIndex = "10000";
+				_div.style.left = _posLeft + "px";
+				_div.style.top = _posTop + "px";
+
+				document.body.appendChild(_div);
+			} else {
+
+				_div = document.getElementById(this.collectionArray[i].name);
+				_div.style.left = _posLeft + "px";
+				_div.style.top = _posTop + "px";
+			}
 		}
 		
 		
 		
+		
+		
 	}
 	
-	return PinWithLabel;
+	return PinWithLabelCollection;
 	
 })();
