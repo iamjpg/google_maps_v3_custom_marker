@@ -1,8 +1,13 @@
 .PinWithLabelCollection {
 	position: absolute;
 	z-index: 10000;
+	font-family: Helvetica, Verdana, Arial, sans-serif;
 	font-size: 10px;
 	text-align: center;
+}
+
+.PinWithLabelCollection:hover {
+	z-index: 10001;
 }
 
 .PinWithLabelCollection .label {
@@ -11,6 +16,12 @@
 	font-size: 9px;
 	color: #FFF;
 	display: inline-block;
+	-webkit-border-top-left-radius: 3px;
+	-webkit-border-top-right-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-topright: 3px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
 }
 
 .PinWithLabelCollection .open {
@@ -21,7 +32,7 @@
 	background: #CA0C0B;
 }
 
-.custom_pin {
+.PinWithLabelCollection .price {
 	background: #0E315D;
 	color: #FFF;
 	font-size: 10px;
@@ -35,4 +46,9 @@
 	-webkit-box-shadow:  2px 2px 2px 0px rgba(0, 0, 0, 1);
 	box-shadow:  2px 2px 2px 0px rgba(0, 0, 0, 1);
 	width: 30px;
+}
+
+.PinWithLabelCollection .price:hover {
+	background: #CCC;
+	color: #000;
 }

@@ -119,7 +119,7 @@ PinWithLabelCollection = (function() {
 				}
 				
 				// Price styling
-				_div_price.className = _class_name;
+				_div_price.className = "price";
 				_div_price.innerHTML = this.collectionArray[i].label;
 				
 				// Conditionally add label
