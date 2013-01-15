@@ -107,27 +107,13 @@ PinWithLabelCollection = (function() {
 				// Container styling
 				_div.id = this.collectionArray[i].name;
 				_div.className = "PinWithLabelCollection";
-				_div.style.position = "absolute";
-				_div.style.zIndex = "10000";
 				_div.style.left = _posLeft + "px";
 				_div.style.top = _posTop + "px";
-				_div.style.fontSize = "10px";
-				_div.style.textAlign = "center";
 				
 				// Label styling
 				if (_this.collectionArray[i].status && _this.collectionArray[i].status !== "active") {
 					
-					_div_label.style.padding = "2px 5px";
-					_div_label.style.margin = "auto";
-					_div_label.style.fontSize = "9px";
-					_div_label.style.color = "#FFFFFF";
-					_div_label.style.display = "inline-block";
-					
-					if (_this.collectionArray[i].status == "open") {
-						_div_label.style.background = "#EA791C";
-					} else {
-						_div_label.style.background = "#CA0C0B";
-					}
+					_div_label.className = "label" + " " + _this.collectionArray[i].status
 					
 					_div_label.innerHTML = _this.collectionArray[i].status;
 				}
