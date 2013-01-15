@@ -32,7 +32,7 @@
 	background: #CA0C0B;
 }
 
-.PinWithLabelCollection .price {
+.PinWithLabelCollection .PWLCprice {
 	background: #0E315D;
 	color: #FFF;
 	font-size: 10px;
@@ -48,7 +48,7 @@
 	width: 30px;
 }
 
-.PinWithLabelCollection .price:hover {
+.PinWithLabelCollection .PWLCprice:hover {
 	background: #CCC;
 	color: #000;
 }

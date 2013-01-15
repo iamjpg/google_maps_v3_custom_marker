@@ -61,6 +61,10 @@ PinWithLabelCollection = (function() {
 			
 		});
 		
+		this.eventBinding(document, "click", function(e) {
+		    _this.click(e);
+		});
+		
 	}
 	
 	// Set the map projection to calculate lat/lng to pixel x,y
@@ -119,7 +123,7 @@ PinWithLabelCollection = (function() {
 				}
 				
 				// Price styling
-				_div_price.className = "price";
+				_div_price.className = "PWLCprice";
 				_div_price.innerHTML = this.collectionArray[i].label;
 				
 				// Conditionally add label
@@ -140,6 +144,31 @@ PinWithLabelCollection = (function() {
 			}
 		}
 		
+	}
+	
+	PinWithLabelCollection.prototype.click = function(e) {
+		
+		// Set e.target to work in IE.
+	    e.target = e.target || e.srcElement
+		
+		var _elements = document.getElementsByClassName("PinWithLabelCollection");
+		
+		for (i = 0; i < _elements.length; i++) {
+			_elements[i].style.zIndex = '10000';
+		}
+		
+		e.target.parentNode.style.zIndex = "10001";
+		
+	}
+	
+	PinWithLabelCollection.prototype.eventBinding = function (el, eventName, eventHandler) {
+	    // For Chrome, FF, Safari, etc
+	    if (el.addEventListener) {
+	        el.addEventListener(eventName, eventHandler, false);
+	    // For IE
+	    } else if (el.attachEvent) {
+	        el.attachEvent('on' + eventName, eventHandler);
+	    }
 	}
 	
 	PinWithLabelCollection.prototype.setMapViewBasedOnCollection = function() {
