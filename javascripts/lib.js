@@ -31,11 +31,15 @@ var setCustomPin = function() {
 	var _collection = [
 		{
 			name: "div1",
+			class_name: "custom_pin active",
+			label: "500k",
 			lat: 47.688729,
 			lng: -122.286721
 		},
 		{
 			name: "div2",
+			class_name: "custom_pin sold",
+			label: "650k",
 			lat: 47.6884438,
 			lng: -122.287455
 		}
