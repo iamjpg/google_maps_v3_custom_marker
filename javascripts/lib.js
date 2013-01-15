@@ -8,6 +8,10 @@ $(document).ready(function() {
 	// Set custom Pin
 	setCustomPin();
 	
+	google.maps.event.addListener(_map, 'click', function( event ){
+	  console.log( "Latitude: "+event.latLng.lat()+" "+", longitude: "+event.latLng.lng() ); 
+	});
+	
 });
 
 
@@ -26,7 +30,7 @@ var initMap = function () {
 
 var setCustomPin = function() {
 	
-	var _pin_collection = new PinWithLabelCollection("First Collection");
+	_pin_collection = new PinWithLabelCollection("First Collection");
 	
 	var _collection = [
 		{
@@ -42,6 +46,27 @@ var setCustomPin = function() {
 			label: "650k",
 			lat: 47.6884438,
 			lng: -122.287455
+		},
+		{
+			name: "div3",
+			class_name: "custom_pin active",
+			label: "820k",
+			lat: 47.68684970494409,
+			lng: -122.28802442550659
+		},
+		{
+			name: "div4",
+			class_name: "custom_pin active",
+			label: "325k",
+			lat: 47.68616356653837,
+			lng: -122.27527856826782
+		},
+		{
+			name: "div5",
+			class_name: "custom_pin active",
+			label: "525k",
+			lat: 47.6859035538369,
+			lng: -122.31576919555664
 		}
 	];
 	
@@ -50,6 +75,6 @@ var setCustomPin = function() {
 		collection: _collection
 	});
 	
-	console.log(_pin_collection);
+	_pin_collection.setMapViewBasedOnCollection();
 	
 }

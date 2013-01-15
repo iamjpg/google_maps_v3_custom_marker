@@ -117,10 +117,29 @@ PinWithLabelCollection = (function() {
 			}
 		}
 		
-		
-		
-		
-		
+	}
+	
+	PinWithLabelCollection.prototype.setMapViewBasedOnCollection = function() {
+		var i, loc, markerBounds, o;
+		var _this = this;
+		if (this.collectionArray.length > 1) {
+			markerBounds = new google.maps.LatLngBounds();
+			i = 0;
+			while (i < this.collectionArray.length) {
+				o = this.collectionArray[i];
+				if (o.lat != null) {
+					loc = new google.maps.LatLng(parseFloat(o.lat), parseFloat(o.lng));
+					markerBounds.extend(loc);
+				}
+				i++;
+			}
+			return _this.map.fitBounds(markerBounds);
+		} else {
+			o = this.collectionArray[0];
+			if (o) {
+				return this.centerAndZoom(o.lat, o.lng, 17);
+			}
+		}
 	}
 	
 	return PinWithLabelCollection;
