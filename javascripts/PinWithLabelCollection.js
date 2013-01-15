@@ -65,6 +65,14 @@ PinWithLabelCollection = (function() {
 		    _this.click(e);
 		});
 		
+		this.eventBinding(document, "mouseover", function(e) {
+		    _this.mouseHover(e, "in");
+		});
+		
+		this.eventBinding(document, "mouseout", function(e) {
+		    _this.mouseHover(e, "out");
+		});
+		
 	}
 	
 	// Set the map projection to calculate lat/lng to pixel x,y
@@ -157,7 +165,40 @@ PinWithLabelCollection = (function() {
 			_elements[i].style.zIndex = '10000';
 		}
 		
-		e.target.parentNode.style.zIndex = "10001";
+		e.target.parentNode.style.zIndex = "10002";
+		
+	}
+	
+	PinWithLabelCollection.prototype.mouseHover = function (e, action) {
+		
+		// Set e.target to work in IE.
+	    e.target = e.target || e.srcElement
+	
+		var _elements = document.getElementsByClassName("PinWithLabelCollection");
+		
+		if (e.target.parentNode.className == "PinWithLabelCollection") {
+			
+			if (action == "out") {
+				
+				for (i = 0; i < _elements.length; i++) {
+					
+					// If not last clicked marker
+					if (_elements[i].style.zIndex !== "10002") {
+						_elements[i].style.zIndex = '10000';
+					}
+					
+				}
+				
+			} else {
+				
+				// If not last clicked marker
+				if (e.target.parentNode.style.zIndex !== "10002") {
+					e.target.parentNode.style.zIndex = "10001";
+				}
+				
+			}
+			
+		}
 		
 	}
 	

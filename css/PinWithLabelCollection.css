@@ -4,10 +4,7 @@
 	font-family: Helvetica, Verdana, Arial, sans-serif;
 	font-size: 10px;
 	text-align: center;
-}
-
-.PinWithLabelCollection:hover {
-	z-index: 10001;
+	cursor: pointer;
 }
 
 .PinWithLabelCollection .label {
@@ -42,7 +39,6 @@
 	border-radius: 5px;
 	border: 1px solid #FFF;
 	text-align: center;
-	cursor: pointer;
 	-webkit-box-shadow:  2px 2px 2px 0px rgba(0, 0, 0, 1);
 	box-shadow:  2px 2px 2px 0px rgba(0, 0, 0, 1);
 	width: 30px;
