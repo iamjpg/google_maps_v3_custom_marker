@@ -125,13 +125,13 @@ PinWithLabelCollection = (function() {
 				// Label styling
 				if (_this.collectionArray[i].status && _this.collectionArray[i].status !== "active") {
 					
-					_div_label.className = "label" + " " + _this.collectionArray[i].status
+					_div_label.className = "pwlc-status" + " " + _this.collectionArray[i].status
 					
 					_div_label.innerHTML = _this.collectionArray[i].status;
 				}
 				
 				// Price styling
-				_div_price.className = "PWLCprice";
+				_div_price.className = "pwlc-label";
 				_div_price.innerHTML = this.collectionArray[i].label;
 				
 				// Conditionally add label
@@ -147,7 +147,7 @@ PinWithLabelCollection = (function() {
 			} else {
 
 				_div = document.getElementById(this.collectionArray[i].name);
-				_div.style.left = _posLeft + "px";
+				_div.style.left = (_posLeft - 15) + "px";
 				_div.style.top = _posTop + "px";
 			}
 		}
